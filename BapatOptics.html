@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bapat Optics — Precision Eyewear, Kothrud, Pune</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#ffffff;
+    --ice:#f3f9ff;
+    --sky:#e4f0ff;
+    --blue:#0057ff;
+    --blue-dim:#3d7bff;
+    --deep:#071633;
+    --deep-2:#0d224a;
+    --slate:#54637b;
+    --line:#dce9fb;
+    --gold:#c9a15a;
+    --radius-s:10px;
+    --radius-m:18px;
+    --radius-l:28px;
+    --ease:cubic-bezier(.22,.68,0,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--deep);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.disp{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  ul{list-style:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+  section{scroll-margin-top:84px;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px;}
+
+  :focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.82);
+    backdrop-filter:blur(14px) saturate(160%);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  header.scrolled{
+    border-color:var(--line);
+    box-shadow:0 8px 24px -18px rgba(7,22,51,.25);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 40px; max-width:1240px; margin:0 auto;
+  }
+  .brandmark{display:flex;align-items:center;gap:12px;}
+  .brandmark svg{width:34px;height:34px;flex-shrink:0;}
+  .brandmark .word{font-size:19px;font-weight:600;letter-spacing:-.02em;line-height:1;}
+  .brandmark .word span{display:block;font-family:'Inter';font-weight:500;font-size:9.5px;letter-spacing:.14em;color:var(--slate);margin-top:3px;}
+
+  .navlinks{display:flex;gap:36px;align-items:center;}
+  .navlinks a{
+    font-size:14.5px;font-weight:500;color:var(--deep);position:relative;padding:6px 0;
+  }
+  .navlinks a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--blue);
+    transition:width .3s var(--ease);
+  }
+  .navlinks a:hover::after{width:100%;}
+
+  .navcta{display:flex;align-items:center;gap:18px;}
+  .cart-btn{position:relative;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .25s;}
+  .cart-btn:hover{background:var(--ice);}
+  .cart-btn svg{width:20px;height:20px;}
+  .cart-count{
+    position:absolute;top:0px;right:0px;background:var(--blue);color:#fff;font-size:10px;font-weight:700;
+    width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    transform:scale(0); transition:transform .35s var(--ease);
+  }
+  .cart-count.show{transform:scale(1);}
+  .cart-count.bump{animation:bump .4s var(--ease);}
+  @keyframes bump{ 40%{transform:scale(1.5);} 100%{transform:scale(1);} }
+
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;border-radius:100px;font-size:14px;font-weight:600;
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s, color .25s;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--deep);color:#fff;}
+  .btn-primary:hover{background:var(--blue);transform:translateY(-2px);box-shadow:0 14px 28px -12px rgba(0,87,255,.55);}
+  .btn-outline{border:1.5px solid var(--line);color:var(--deep);}
+  .btn-outline:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px);}
+  .btn-light{background:#fff;color:var(--deep);}
+  .btn-light:hover{transform:translateY(-2px);box-shadow:0 14px 28px -14px rgba(0,0,0,.35);}
+  .btn svg{width:15px;height:15px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:linear-gradient(180deg, var(--ice) 0%, var(--white) 78%);
+    padding:88px 0 60px;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;
+  }
+  .eyebrow-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:600;color:var(--blue);
+    background:#fff;border:1px solid var(--line);padding:7px 14px;border-radius:100px;
+    opacity:0; transform:translateY(10px);
+    animation:reveal .7s var(--ease) .1s forwards;
+  }
+  .eyebrow-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+  .hero h1{
+    font-size:clamp(40px,5.2vw,68px);
+    font-weight:600;letter-spacing:-.035em;line-height:1.02;
+    margin:22px 0 20px;
+    opacity:0; transform:translateY(22px);
+    animation:reveal .8s var(--ease) .22s forwards;
+  }
+  .hero h1 em{font-style:normal;color:var(--blue);}
+  .hero p.lead{
+    font-size:17.5px;color:var(--slate);max-width:460px;line-height:1.6;
+    opacity:0; transform:translateY(18px);
+    animation:reveal .8s var(--ease) .36s forwards;
+  }
+  .hero-cta{
+    display:flex;gap:14px;margin-top:34px;
+    opacity:0; transform:translateY(18px);
+    animation:reveal .8s var(--ease) .5s forwards;
+  }
+  @keyframes reveal{to{opacity:1;transform:translateY(0);}}
+
+  .stat-row{
+    display:flex;gap:34px;margin-top:52px;
+    opacity:0; transform:translateY(16px);
+    animation:reveal .8s var(--ease) .64s forwards;
+  }
+  .stat-row div{border-left:2px solid var(--line);padding-left:14px;}
+  .stat-row strong{display:block;font-family:'Space Grotesk';font-size:22px;font-weight:600;}
+  .stat-row span{font-size:12.5px;color:var(--slate);}
+
+  /* hero visual */
+  .hero-visual{position:relative;height:460px;display:flex;align-items:center;justify-content:center;}
+  .glow{
+    position:absolute;width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle, rgba(0,87,255,.18), transparent 70%);
+    filter:blur(4px);
+    animation:breathe 6s ease-in-out infinite;
+  }
+  @keyframes breathe{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+
+  .glasses-float{
+    position:relative;width:400px;
+    opacity:0; transform:translateY(30px) rotate(-4deg);
+    animation:floatIn 1s var(--ease) .5s forwards, hover 5s ease-in-out 1.6s infinite;
+  }
+  @keyframes floatIn{to{opacity:1;transform:translateY(0) rotate(-4deg);}}
+  @keyframes hover{0%,100%{transform:translateY(0) rotate(-4deg);}50%{transform:translateY(-14px) rotate(-2deg);}}
+
+  .sweep-mask{
+    animation:sweep 3.4s var(--ease) 1.4s 1;
+  }
+  @keyframes sweep{
+    0%{ transform:translateX(-140%) skewX(-18deg); }
+    60%,100%{ transform:translateX(220%) skewX(-18deg); }
+  }
+
+  /* ---------- MARQUEE ---------- */
+  .brandstrip{padding:38px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff;}
+  .brandstrip .label{
+    text-align:center;font-size:13px;color:var(--slate);margin-bottom:26px;
+  }
+  .marquee{width:100%;overflow:hidden;position:relative;}
+  .marquee::before,.marquee::after{
+    content:"";position:absolute;top:0;bottom:0;width:90px;z-index:2;
+  }
+  .marquee::before{left:0;background:linear-gradient(90deg,#fff,transparent);}
+  .marquee::after{right:0;background:linear-gradient(270deg,#fff,transparent);}
+  .marquee-track{display:flex;gap:64px;width:max-content;animation:scroll 28s linear infinite;}
+  .marquee-track span{
+    font-family:'Space Grotesk';font-size:24px;font-weight:600;color:var(--deep);opacity:.42;
+    letter-spacing:-.01em; transition:opacity .3s, color .3s;
+  }
+  .marquee-track span:hover{opacity:1;color:var(--blue);}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- SECTION HEADS ---------- */
+  .sec-head{max-width:560px;margin-bottom:48px;}
+  .sec-head .tag{font-size:13px;font-weight:600;color:var(--blue);margin-bottom:10px;display:block;}
+  .sec-head h2{font-size:clamp(28px,3.4vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1.1;}
+  .sec-head p{color:var(--slate);margin-top:12px;font-size:15.5px;line-height:1.6;}
+  .sec-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+
+  /* ---------- COLLECTION ---------- */
+  .collection{padding:100px 0;}
+  .col-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  .col-card{
+    background:var(--ice);border:1px solid transparent;border-radius:var(--radius-m);
+    padding:30px 26px;transition:transform .4s var(--ease), border-color .4s, background .4s, box-shadow .4s;
+  }
+  .col-card:hover{
+    transform:translateY(-8px);background:#fff;border-color:var(--line);
+    box-shadow:0 26px 50px -30px rgba(7,22,51,.3);
+  }
+  .col-card .icn{width:44px;height:44px;color:var(--blue);margin-bottom:22px;transition:transform .4s var(--ease);}
+  .col-card:hover .icn{transform:scale(1.12) rotate(-4deg);}
+  .col-card h3{font-size:18px;font-weight:600;margin-bottom:8px;letter-spacing:-.01em;}
+  .col-card p{font-size:13.5px;color:var(--slate);line-height:1.55;margin-bottom:18px;}
+  .col-card .go{font-size:13px;font-weight:600;color:var(--deep);display:inline-flex;align-items:center;gap:6px;}
+  .col-card .go svg{width:13px;height:13px;transition:transform .3s var(--ease);}
+  .col-card:hover .go svg{transform:translateX(4px);}
+
+  /* ---------- EYEQ (dark) ---------- */
+  .eyeq{
+    background:var(--deep);color:#fff;padding:110px 0;position:relative;overflow:hidden;
+  }
+  .eyeq::before{
+    content:"";position:absolute;top:-200px;right:-160px;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle, rgba(0,87,255,.35), transparent 70%);
+  }
+  .eyeq-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:70px;align-items:center;position:relative;z-index:1;}
+  .eyeq .tag{color:var(--blue-dim);}
+  .eyeq h2{color:#fff;}
+  .eyeq p.lead{color:#aebcd8;margin-top:16px;font-size:16px;line-height:1.65;max-width:460px;}
+  .eyeq-list{margin-top:34px;display:flex;flex-direction:column;gap:20px;}
+  .eyeq-list li{display:flex;gap:16px;align-items:flex-start;}
+  .eyeq-list .num{
+    width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.25);
+    display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;color:#fff;
+  }
+  .eyeq-list h4{font-size:15.5px;font-weight:600;margin-bottom:4px;}
+  .eyeq-list p{font-size:13.5px;color:#93a3c2;line-height:1.55;}
+
+  .eyeq-visual{
+    background:linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-l);
+    padding:34px;
+  }
+  .eyeq-visual .mock-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+  .eyeq-visual .mock-top span{font-size:12px;color:#7f8fb0;}
+  .scan-box{
+    height:220px;border-radius:var(--radius-m);border:1px solid rgba(255,255,255,.14);
+    background:radial-gradient(circle at 50% 45%, rgba(0,87,255,.22), transparent 65%);
+    position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  }
+  .scan-box svg{width:90px;height:90px;color:var(--blue-dim);}
+  .scan-line{
+    position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#4d8dff,transparent);
+    animation:scanmove 2.6s ease-in-out infinite;
+  }
+  @keyframes scanmove{0%{top:8%;}50%{top:92%;}100%{top:8%;}}
+  .eyeq-metrics{display:flex;gap:14px;margin-top:22px;}
+  .eyeq-metrics div{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-s);padding:14px;}
+  .eyeq-metrics strong{display:block;font-family:'Space Grotesk';font-size:19px;}
+  .eyeq-metrics span{font-size:11px;color:#8a99b9;}
+
+  /* ---------- SHOP ---------- */
+  .shop{padding:100px 0;}
+  .shop-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;}
+  .filter-row{display:flex;gap:10px;}
+  .fchip{
+    padding:9px 18px;border-radius:100px;border:1px solid var(--line);font-size:13px;font-weight:500;
+    transition:.3s var(--ease);
+  }
+  .fchip.active,.fchip:hover{background:var(--deep);color:#fff;border-color:var(--deep);}
+
+  .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .pcard{
+    border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden;background:#fff;
+    transition:box-shadow .4s var(--ease), transform .4s var(--ease), border-color .4s;
+  }
+  .pcard:hover{transform:translateY(-6px);box-shadow:0 30px 50px -30px rgba(7,22,51,.28);border-color:transparent;}
+  .pcard-media{
+    aspect-ratio:1/.85;background:var(--ice);display:flex;align-items:center;justify-content:center;position:relative;
+    padding:28px;
+  }
+  .pcard-media svg{width:100%;height:auto;transition:transform .5s var(--ease);}
+  .pcard:hover .pcard-media svg{transform:scale(1.06) rotate(-2deg);}
+  .pcard-tag{
+    position:absolute;top:12px;left:12px;background:#fff;font-size:10.5px;font-weight:600;
+    padding:4px 10px;border-radius:100px;color:var(--slate);border:1px solid var(--line);
+  }
+  .pcard-body{padding:18px 18px 20px;}
+  .pcard-brand{font-size:11.5px;font-weight:600;letter-spacing:.04em;color:var(--blue);margin-bottom:4px;}
+  .pcard-name{font-size:15px;font-weight:600;margin-bottom:10px;letter-spacing:-.01em;}
+  .pcard-foot{display:flex;align-items:center;justify-content:space-between;}
+  .pcard-price{font-family:'Space Grotesk';font-size:16px;font-weight:600;}
+  .addcart{
+    width:36px;height:36px;border-radius:50%;border:1.5px solid var(--deep);display:flex;align-items:center;justify-content:center;
+    transition:background .3s, transform .3s var(--ease), border-color .3s;
+  }
+  .addcart svg{width:15px;height:15px;transition:stroke .3s;}
+  .addcart:hover{background:var(--deep);}
+  .addcart:hover svg{stroke:#fff;}
+  .addcart.added{background:var(--blue);border-color:var(--blue);}
+  .addcart.added svg{stroke:#fff;}
+
+  .shop-more{text-align:center;margin-top:48px;}
+
+  /* ---------- APPOINTMENT ---------- */
+  .appointment{background:var(--ice);padding:110px 0;}
+  .appt-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#fff;border-radius:var(--radius-l);overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 70px -50px rgba(7,22,51,.35);}
+  .appt-info{background:var(--deep);color:#fff;padding:52px 44px;position:relative;overflow:hidden;}
+  .appt-info::after{
+    content:"";position:absolute;bottom:-140px;left:-100px;width:340px;height:340px;border-radius:50%;
+    background:radial-gradient(circle, rgba(0,87,255,.3), transparent 70%);
+  }
+  .appt-info h3{font-size:24px;font-weight:600;margin-bottom:14px;letter-spacing:-.02em;position:relative;z-index:1;}
+  .appt-info p{color:#a9b7d4;font-size:14.5px;line-height:1.6;margin-bottom:30px;max-width:340px;position:relative;z-index:1;}
+  .appt-detail{display:flex;gap:14px;margin-bottom:22px;position:relative;z-index:1;}
+  .appt-detail svg{width:19px;height:19px;color:var(--blue-dim);flex-shrink:0;margin-top:2px;}
+  .appt-detail h5{font-size:13.5px;font-weight:600;margin-bottom:3px;}
+  .appt-detail span{font-size:13px;color:#93a3c2;line-height:1.5;}
+  .map-abstract{
+    margin-top:32px;height:130px;border-radius:var(--radius-s);border:1px solid rgba(255,255,255,.14);
+    position:relative;overflow:hidden;z-index:1;
+    background-image:
+      linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size:22px 22px;
+  }
+  .map-pin{position:absolute;top:46%;left:38%;width:14px;height:14px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 6px rgba(0,87,255,.25);}
+  .map-pin::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--blue);animation:ping 2s ease-out infinite;}
+  @keyframes ping{0%{transform:scale(1);opacity:.8;}100%{transform:scale(2.6);opacity:0;}}
+
+  .appt-form{padding:52px 44px;}
+  .appt-form h3{font-size:22px;font-weight:600;margin-bottom:6px;letter-spacing:-.02em;}
+  .appt-form>p{color:var(--slate);font-size:14px;margin-bottom:28px;}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:12.5px;font-weight:600;color:var(--slate);}
+  .field input,.field select{
+    border:1.5px solid var(--line);border-radius:var(--radius-s);padding:12px 14px;font-size:14px;
+    font-family:inherit;color:var(--deep);transition:border-color .3s, box-shadow .3s;background:#fff;
+  }
+  .field input:focus,.field select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,87,255,.12);}
+  .appt-submit{
+    width:100%;margin-top:8px;padding:14px;border-radius:var(--radius-s);background:var(--deep);color:#fff;
+    font-weight:600;font-size:14.5px;display:flex;align-items:center;justify-content:center;gap:8px;
+    transition:background .3s, transform .3s var(--ease);
+  }
+  .appt-submit:hover{background:var(--blue);transform:translateY(-2px);}
+  .appt-success{
+    display:none;align-items:center;gap:12px;background:#eaf7ee;color:#1f7a3f;border:1px solid #cdeed8;
+    padding:14px 16px;border-radius:var(--radius-s);font-size:13.5px;font-weight:600;margin-top:14px;
+    opacity:0;transform:translateY(-6px);transition:opacity .4s var(--ease), transform .4s var(--ease);
+  }
+  .appt-success.show{display:flex;opacity:1;transform:translateY(0);}
+  .appt-success svg{width:18px;height:18px;flex-shrink:0;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#fff;border-top:1px solid var(--line);padding:70px 0 0;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr .8fr .8fr 1fr;gap:40px;padding-bottom:56px;}
+  .foot-brand p{color:var(--slate);font-size:13.5px;margin-top:16px;line-height:1.6;max-width:260px;}
+  .foot-social{display:flex;gap:10px;margin-top:22px;}
+  .foot-social a{
+    width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+    transition:.3s var(--ease);
+  }
+  .foot-social a:hover{background:var(--deep);border-color:var(--deep);color:#fff;transform:translateY(-3px);}
+  .foot-social svg{width:16px;height:16px;}
+  .foot-col h5{font-size:13px;font-weight:600;margin-bottom:18px;}
+  .foot-col ul{display:flex;flex-direction:column;gap:11px;}
+  .foot-col a{font-size:13.5px;color:var(--slate);transition:color .25s;}
+  .foot-col a:hover{color:var(--blue);}
+  .foot-addr p{font-size:13.5px;color:var(--slate);line-height:1.65;}
+  .foot-addr strong{display:block;color:var(--deep);font-size:14px;margin-bottom:6px;}
+  .newsletter{margin-top:16px;display:flex;border:1.5px solid var(--line);border-radius:100px;padding:4px;}
+  .newsletter input{flex:1;border:none;background:none;padding:8px 14px;font-size:13px;font-family:inherit;}
+  .newsletter input:focus{outline:none;}
+  .newsletter button{background:var(--deep);color:#fff;border-radius:100px;padding:8px 16px;font-size:12.5px;font-weight:600;transition:background .3s;}
+  .newsletter button:hover{background:var(--blue);}
+  .foot-bottom{
+    border-top:1px solid var(--line);padding:22px 0;display:flex;justify-content:space-between;align-items:center;
+  }
+  .foot-bottom span{font-size:12.5px;color:var(--slate);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px){
+    .navlinks{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{height:320px;order:-1;}
+    .col-grid{grid-template-columns:repeat(2,1fr);}
+    .eyeq-grid{grid-template-columns:1fr;}
+    .prod-grid{grid-template-columns:repeat(2,1fr);}
+    .appt-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .stat-row{flex-wrap:wrap;row-gap:16px;}
+  }
+  @media (max-width:560px){
+    .wrap,.nav{padding-left:22px;padding-right:22px;}
+    .col-grid,.prod-grid{grid-template-columns:1fr;}
+    .frow{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    .shop-top{flex-direction:column;align-items:flex-start;gap:18px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header id="siteHeader">
+  <div class="nav">
+    <a href="#hero" class="brandmark">
+      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 16 L10 30 L20 44" stroke="#071633" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M40 16 L50 30 L40 44" stroke="#071633" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="30" cy="30" r="11" stroke="#0057ff" stroke-width="3.2"/>
+        <line x1="30" y1="14" x2="30" y2="26" stroke="#0057ff" stroke-width="3.2" stroke-linecap="round"/>
+      </svg>
+      <div class="word">bapat optics<span>KOTHRUD · PUNE</span></div>
+    </a>
+    <nav class="navlinks">
+      <a href="#collection">Collection</a>
+      <a href="#eyeq">EyeQ</a>
+      <a href="#shop">Shop</a>
+      <a href="#appointment">Appointment</a>
+    </nav>
+    <div class="navcta">
+      <button class="cart-btn" id="cartBtn" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#071633" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <a href="#appointment" class="btn btn-primary">Book eye test</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow-tag"><span class="dot"></span> Now booking EyeQ eye tests in Kothrud</span>
+      <h1>Clarity,<br><em>engineered.</em></h1>
+      <p class="lead">Eight of the world's most exacting eyewear houses, an AI-guided vision test, and a fitting studio in the heart of Pune. See sharper, see better.</p>
+      <div class="hero-cta">
+        <a href="#shop" class="btn btn-primary">Shop the collection</a>
+        <a href="#appointment" class="btn btn-outline">Book an eye test</a>
+      </div>
+      <div class="stat-row">
+        <div><strong>8</strong><span>Luxury houses</span></div>
+        <div><strong>20 min</strong><span>AI-guided eye test</span></div>
+        <div><strong>Same-day</strong><span>Frame fitting</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="glow"></div>
+      <div class="glasses-float">
+        <svg viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="lensA" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#cfe4ff"/>
+              <stop offset="100%" stop-color="#f3f9ff"/>
+            </linearGradient>
+            <clipPath id="clipL"><rect x="34" y="58" width="130" height="90" rx="26"/></clipPath>
+            <clipPath id="clipR"><rect x="236" y="58" width="130" height="90" rx="26"/></clipPath>
+          </defs>
+          <rect x="34" y="58" width="130" height="90" rx="26" fill="url(#lensA)" stroke="#071633" stroke-width="4"/>
+          <rect x="236" y="58" width="130" height="90" rx="26" fill="url(#lensA)" stroke="#071633" stroke-width="4"/>
+          <g clip-path="url(#clipL)"><rect class="sweep-mask" x="-40" y="30" width="60" height="160" fill="rgba(255,255,255,.85)"/></g>
+          <g clip-path="url(#clipR)"><rect class="sweep-mask" x="-40" y="30" width="60" height="160" fill="rgba(255,255,255,.85)" style="animation-delay:1.7s"/></g>
+          <path d="M164 90 Q200 74 236 90" stroke="#071633" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M34 96 L4 84" stroke="#071633" stroke-width="4" stroke-linecap="round"/>
+          <path d="M366 96 L396 84" stroke="#071633" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BRAND MARQUEE ================= -->
+<section class="brandstrip">
+  <p class="label">Frames from the world's most exacting houses</p>
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>Ferrari</span><span>Ray-Ban</span><span>Prada</span><span>Polo Ralph Lauren</span><span>Tom Ford</span><span>Versace</span><span>Tommy Hilfiger</span><span>Maybach</span>
+      <span>Ferrari</span><span>Ray-Ban</span><span>Prada</span><span>Polo Ralph Lauren</span><span>Tom Ford</span><span>Versace</span><span>Tommy Hilfiger</span><span>Maybach</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COLLECTION ================= -->
+<section class="collection" id="collection">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Collection</span>
+      <h2>Find your frame</h2>
+      <p>Four ways to see the world differently — pick a starting point, then refine with a fitting.</p>
+    </div>
+    <div class="col-grid">
+      <div class="col-card">
+        <svg class="icn" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="14" cy="24" r="9"/><circle cx="34" cy="24" r="9"/><path d="M23 24h2"/></svg>
+        <h3>Optical</h3>
+        <p>Everyday prescription frames in acetate, titanium and steel.</p>
+        <a href="#shop" class="go">Explore optical <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="col-card">
+        <svg class="icn" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 20h12l4 6 4-6h12" /><circle cx="14" cy="26" r="6"/><circle cx="34" cy="26" r="6"/></svg>
+        <h3>Sunglasses</h3>
+        <p>Polarised lenses and UV400 protection for every drive.</p>
+        <a href="#shop" class="go">Explore sun <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="col-card">
+        <svg class="icn" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="8" y="16" width="32" height="18" rx="9"/><path d="M24 4v8M16 6l3 6M32 6l-3 6"/></svg>
+        <h3>Blue light</h3>
+        <p>Screen-ready lenses for late nights and long workdays.</p>
+        <a href="#shop" class="go">Explore blue light <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="col-card">
+        <svg class="icn" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M24 6l4 9 10 1-7.5 6.8L32 32l-8-5-8 5 1.5-9.2L10 16l10-1z"/></svg>
+        <h3>Luxury line</h3>
+        <p>Limited editions from Maybach, Tom Ford and Versace.</p>
+        <a href="#shop" class="go">Explore luxury <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EYEQ (dark) ================= -->
+<section class="eyeq" id="eyeq">
+  <div class="wrap eyeq-grid">
+    <div>
+      <span class="tag">EyeQ · AI eye test</span>
+      <h2>Your eye test, reimagined.</h2>
+      <p class="lead">EyeQ pairs a licensed optometrist with an AI refraction model, so your prescription is ready before you've picked a frame.</p>
+      <ul class="eyeq-list">
+        <li><span class="num">1</span><div><h4>Guided refraction scan</h4><p>A 20-minute AI-assisted test, cross-checked by our optometrist in Kothrud.</p></div></li>
+        <li><span class="num">2</span><div><h4>Virtual try-on</h4><p>Preview any frame from our eight brands on your own face before you buy.</p></div></li>
+        <li><span class="num">3</span><div><h4>In-store or at home</h4><p>Visit the Kothrud studio, or have our technician come to you.</p></div></li>
+      </ul>
+      <a href="#appointment" class="btn btn-primary" style="margin-top:34px;">Start your EyeQ test</a>
+    </div>
+    <div class="eyeq-visual">
+      <div class="mock-top"><span>EyeQ · live scan</span><span>Right eye</span></div>
+      <div class="scan-box">
+        <div class="scan-line"></div>
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="24" cy="24" rx="18" ry="10"/><circle cx="24" cy="24" r="6"/><circle cx="24" cy="24" r="2" fill="currentColor"/></svg>
+      </div>
+      <div class="eyeq-metrics">
+        <div><strong>-1.25</strong><span>Sphere (est.)</span></div>
+        <div><strong>98%</strong><span>Scan confidence</span></div>
+        <div><strong>0.4s</strong><span>Response time</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHOP ================= -->
+<section class="shop" id="shop">
+  <div class="wrap">
+    <div class="shop-top">
+      <div class="sec-head" style="margin-bottom:0;">
+        <span class="tag">Shop</span>
+        <h2>Bestsellers this season</h2>
+      </div>
+      <div class="filter-row">
+        <button class="fchip active">All</button>
+        <button class="fchip">Optical</button>
+        <button class="fchip">Sunglasses</button>
+        <button class="fchip">Luxury</button>
+      </div>
+    </div>
+
+    <div class="prod-grid" id="prodGrid">
+      <!-- product cards injected identically in markup for no-js fallback -->
+    </div>
+
+    <div class="shop-more"><a href="#" class="btn btn-outline">View full collection</a></div>
+  </div>
+</section>
+
+<!-- ================= APPOINTMENT ================= -->
+<section class="appointment" id="appointment">
+  <div class="wrap">
+    <div class="sec-head center" style="margin-bottom:44px;">
+      <span class="tag">Appointment</span>
+      <h2>Book your visit</h2>
+      <p>Eye tests, frame fittings and consultations at our Kothrud studio.</p>
+    </div>
+
+    <div class="appt-grid">
+      <div class="appt-info">
+        <h3>Bapat Optics — Kothrud</h3>
+        <p>Our flagship studio and EyeQ diagnostics lab, five minutes from Kothrud Depot.</p>
+
+        <div class="appt-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <div><h5>Address</h5><span>Bapat Optics, Kothrud, Pune, Maharashtra 411038</span></div>
+        </div>
+        <div class="appt-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+          <div><h5>Studio hours</h5><span>Mon – Sat, 10:00 am – 8:00 pm · Sun, 11:00 am – 6:00 pm</span></div>
+        </div>
+        <div class="appt-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.8 2z"/></svg>
+          <div><h5>Phone</h5><span>+91 98765 43210</span></div>
+        </div>
+
+        <div class="map-abstract"><div class="map-pin"></div></div>
+      </div>
+
+      <div class="appt-form">
+        <h3>Reserve a slot</h3>
+        <p>Takes under a minute — we'll confirm by phone.</p>
+        <form id="apptForm">
+          <div class="frow">
+            <div class="field"><label for="fname">Full name</label><input id="fname" type="text" placeholder="Your name" required></div>
+            <div class="field"><label for="fphone">Phone number</label><input id="fphone" type="tel" placeholder="+91" required></div>
+          </div>
+          <div class="frow">
+            <div class="field"><label for="fdate">Preferred date</label><input id="fdate" type="date" required></div>
+            <div class="field"><label for="ftime">Preferred time</label><input id="ftime" type="time" required></div>
+          </div>
+          <div class="frow">
+            <div class="field full">
+              <label for="freason">What do you need?</label>
+              <select id="freason">
+                <option>EyeQ eye test</option>
+                <option>Frame fitting</option>
+                <option>Lens consultation</option>
+                <option>Repair / adjustment</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="appt-submit">
+            Confirm appointment
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <div class="appt-success" id="apptSuccess">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+            Appointment requested — we'll call to confirm your slot.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#hero" class="brandmark">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 16 L10 30 L20 44" stroke="#071633" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M40 16 L50 30 L40 44" stroke="#071633" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="30" cy="30" r="11" stroke="#0057ff" stroke-width="3.2"/>
+            <line x1="30" y1="14" x2="30" y2="26" stroke="#0057ff" stroke-width="3.2" stroke-linecap="round"/>
+          </svg>
+          <div class="word">bapat optics</div>
+        </a>
+        <p>Precision eyewear and AI-guided eye tests from our studio in Kothrud, Pune.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4 8.3 8.3 0 0 1-4-1L3 20l1.2-5A8.4 8.4 0 1 1 21 11.5z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 9h3V6h-3a4 4 0 0 0-4 4v2H7v3h3v6h3v-6h3l1-3h-4v-2a1 1 0 0 1 1-1z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Shop</h5>
+        <ul>
+          <li><a href="#shop">Optical</a></li>
+          <li><a href="#shop">Sunglasses</a></li>
+          <li><a href="#shop">Blue light</a></li>
+          <li><a href="#shop">Luxury line</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#eyeq">EyeQ</a></li>
+          <li><a href="#collection">Collection</a></li>
+          <li><a href="#appointment">Book appointment</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="foot-col foot-addr">
+        <h5>Visit us</h5>
+        <strong>Bapat Optics</strong>
+        <p>Kothrud, Pune, Maharashtra 411038<br>Mon–Sat 10am–8pm · Sun 11am–6pm</p>
+        <div class="newsletter">
+          <input type="email" placeholder="Email for offers">
+          <button>Join</button>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Bapat Optics, Kothrud, Pune. All rights reserved.</span>
+      <span>Made with care in Pune</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---- header scroll shadow ----
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 12);
+  });
+
+  // ---- product data ----
+  const products = [
+    {brand:'Ferrari', name:'Corsa Aviator', tag:'Sunglasses', price:'₹18,500', tint:'#dfeaff'},
+    {brand:'Ray-Ban', name:'Wayfarer Classic', tag:'Optical', price:'₹9,200', tint:'#eef4ff'},
+    {brand:'Prada', name:'Linea Rossa', tag:'Optical', price:'₹24,000', tint:'#e6f0ff'},
+    {brand:'Polo Ralph Lauren', name:'Heritage Square', tag:'Optical', price:'₹7,800', tint:'#eef4ff'},
+    {brand:'Tom Ford', name:'Private Collection', tag:'Sunglasses', price:'₹32,500', tint:'#e2edff'},
+    {brand:'Versace', name:'Medusa Edge', tag:'Sunglasses', price:'₹28,900', tint:'#e6f0ff'},
+    {brand:'Tommy Hilfiger', name:'Varsity Round', tag:'Optical', price:'₹6,500', tint:'#eef4ff'},
+    {brand:'Maybach', name:'Icon 24K', tag:'Luxury', price:'₹1,45,000', tint:'#e2edff'},
+  ];
+
+  function glassesSVG(color){
+    return `<svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="16" y="28" width="66" height="46" rx="14" stroke="${color}" stroke-width="4"/>
+      <rect x="118" y="28" width="66" height="46" rx="14" stroke="${color}" stroke-width="4"/>
+      <path d="M82 46 Q100 36 118 46" stroke="${color}" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M16 48 L2 42" stroke="${color}" stroke-width="4" stroke-linecap="round"/>
+      <path d="M184 48 L198 42" stroke="${color}" stroke-width="4" stroke-linecap="round"/>
+    </svg>`;
+  }
+
+  const grid = document.getElementById('prodGrid');
+  products.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'pcard';
+    card.innerHTML = `
+      <div class="pcard-media" style="background:${p.tint}">
+        <span class="pcard-tag">${p.tag}</span>
+        ${glassesSVG('#071633')}
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-brand">${p.brand}</div>
+        <div class="pcard-name">${p.name}</div>
+        <div class="pcard-foot">
+          <span class="pcard-price">${p.price}</span>
+          <button class="addcart" aria-label="Add to cart" data-i="${i}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#071633" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h2l2.2 11a2 2 0 0 0 2 1.6h6.4a2 2 0 0 0 2-1.6L21 8H7"/><path d="M12 8v4M10 10h4"/></svg>
+          </button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+
+  // ---- filter chips (visual only) ----
+  document.querySelectorAll('.fchip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.fchip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.textContent.trim();
+      document.querySelectorAll('.pcard').forEach(card=>{
+        const tag = card.querySelector('.pcard-tag').textContent;
+        card.style.display = (f==='All' || tag===f) ? '' : 'none';
+      });
+    });
+  });
+
+  // ---- cart (in-memory, session only) ----
+  let cartCount = 0;
+  const cartCountEl = document.getElementById('cartCount');
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.addcart');
+    if(!btn) return;
+    cartCount++;
+    cartCountEl.textContent = cartCount;
+    cartCountEl.classList.add('show');
+    cartCountEl.classList.remove('bump');
+    void cartCountEl.offsetWidth;
+    cartCountEl.classList.add('bump');
+    btn.classList.add('added');
+    const svg = btn.querySelector('svg');
+    svg.innerHTML = '<path d="M20 6 9 17l-5-5"/>';
+    setTimeout(()=>{
+      btn.classList.remove('added');
+      svg.innerHTML = '<path d="M5 5h2l2.2 11a2 2 0 0 0 2 1.6h6.4a2 2 0 0 0 2-1.6L21 8H7"/><path d="M12 8v4M10 10h4"/>';
+    }, 1400);
+  });
+
+  // ---- appointment form ----
+  const apptForm = document.getElementById('apptForm');
+  const apptSuccess = document.getElementById('apptSuccess');
+  apptForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    apptSuccess.classList.add('show');
+    setTimeout(()=>{
+      apptForm.reset();
+      apptSuccess.classList.remove('show');
+    }, 3600);
+  });
+</script>
+</body>
+</html>
